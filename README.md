@@ -62,10 +62,10 @@ hello-cli hello 张三
 
 ### ask
 
-向 LLM 提问：
+向 LLM 提问（默认使用流式输出）：
 
 ```bash
-# 基本使用
+# 基本使用（流式输出，实时显示回复）
 hello-cli ask "什么是 TypeScript?"
 
 # 指定模型
@@ -79,6 +79,9 @@ hello-cli ask "你好" --base-url https://api.example.com/v1
 
 # 命令行传入 API key
 hello-cli ask "你好" --api-key sk-xxxxx
+
+# 禁用流式输出（等待完整回复后一次性显示）
+hello-cli ask "你好" --no-stream
 ```
 
 **选项：**
@@ -86,6 +89,7 @@ hello-cli ask "你好" --api-key sk-xxxxx
 - `-t, --temperature <number>` - 温度参数 0-2（默认：0.7）
 - `--base-url <url>` - 自定义 API 基础 URL
 - `--api-key <key>` - API 密钥
+- `--no-stream` - 禁用流式输出
 
 ## 兼容的 API 服务
 

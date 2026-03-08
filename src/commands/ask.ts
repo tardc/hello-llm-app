@@ -10,6 +10,7 @@ interface AskOptions {
   temperature: string;
   baseUrl?: string;
   apiKey?: string;
+  stream?: boolean;  // Commander.js 会将 --no-stream 转换为 stream: false
 }
 
 export function createAskCommand(): Command {
@@ -19,6 +20,7 @@ export function createAskCommand(): Command {
     .option("-t, --temperature <number>", "Temperature (0-2)", "0.7")
     .option("--base-url <url>", "API base URL (or use OPENAI_BASE_URL env var)")
     .option("--api-key <key>", "API key (or use OPENAI_API_KEY env var)")
+    .option("--no-stream", "Disable streaming output")
     .description("Ask a question to an OpenAI-compatible LLM")
     .action(async (question: string, options: AskOptions) => {
       try {
@@ -42,28 +44,54 @@ export function createAskCommand(): Command {
         const client = new OpenAI(config);
 
         console.log(`\nAsking: ${question}\n`);
-        console.log("Thinking...\n");
 
-        // Make API request
-        const response = await client.chat.completions.create({
-          model: options.model,
-          messages: [
-            {
-              role: "user",
-              content: question,
-            },
-          ],
-          temperature: parseFloat(options.temperature),
-        });
-
-        const answer = response.choices[0]?.message?.content;
-
-        if (answer) {
+        // Use streaming by default (unless --no-stream is specified)
+        // Commander.js converts --no-stream to stream: false
+        if (options.stream !== false) {
+          // Streaming mode
           console.log("Answer:");
-          console.log(answer);
-          console.log();
+
+          const stream = await client.chat.completions.create({
+            model: options.model,
+            messages: [
+              {
+                role: "user",
+                content: question,
+              },
+            ],
+            temperature: parseFloat(options.temperature),
+            stream: true,
+          });
+
+          for await (const chunk of stream) {
+            const content = chunk.choices[0]?.delta?.content || "";
+            process.stdout.write(content);
+          }
+          console.log("\n");
         } else {
-          console.error("No response received from the API");
+          // Non-streaming mode
+          console.log("Thinking...\n");
+
+          const response = await client.chat.completions.create({
+            model: options.model,
+            messages: [
+              {
+                role: "user",
+                content: question,
+              },
+            ],
+            temperature: parseFloat(options.temperature),
+          });
+
+          const answer = response.choices[0]?.message?.content;
+
+          if (answer) {
+            console.log("Answer:");
+            console.log(answer);
+            console.log();
+          } else {
+            console.error("No response received from the API");
+          }
         }
       } catch (error) {
         console.error("\nError occurred:");
