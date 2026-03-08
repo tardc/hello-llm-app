@@ -1,0 +1,57 @@
+{
+  "name": "hello_node_cli",
+  "version": "1.0.0",
+  "description": "A TypeScript CLI tool with OpenAI-compatible LLM integration",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "hello-cli": "./dist/cli.js"
+  },
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "typecheck": "tsc --noEmit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "commander",
+    "llm",
+    "openai",
+    "typescript",
+    "ai",
+    "chatgpt"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-username/hello_node_cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/hello_node_cli/issues"
+  },
+  "homepage": "https://github.com/your-username/hello_node_cli#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "commander": "^14.0.3",
+    "dotenv": "^17.3.1",
+    "openai": "^6.27.0"
+  }
+}
