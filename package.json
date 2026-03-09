@@ -1,25 +1,26 @@
 {
-  "name": "hello_node_cli",
+  "name": "hello-llm-app",
   "version": "1.0.0",
-  "description": "A TypeScript CLI tool with OpenAI-compatible LLM integration",
-  "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "bin": {
-    "hello-cli": "./dist/cli.js"
-  },
+  "description": "A TypeScript CLI and Web app with OpenAI-compatible LLM integration",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "tsx src/cli.ts",
-    "build": "tsc",
-    "start": "node dist/cli.js",
-    "clean": "rm -rf dist",
-    "prebuild": "npm run clean",
-    "typecheck": "tsc --noEmit",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cli": "npm -w packages/cli run dev --",
+    "web": "npm -w packages/web run dev",
+    "dev": "npm run web",
+    "build": "npm run build:cli && npm run build:web",
+    "build:cli": "npm -w packages/cli run build",
+    "build:web": "npm -w packages/web run build",
+    "typecheck": "npm -w packages/cli run typecheck && npm -w packages/web run typecheck",
+    "clean": "rm -rf packages/*/dist packages/*/.next packages/*/node_modules node_modules",
+    "install:all": "npm install"
   },
   "keywords": [
     "cli",
-    "commander",
+    "web",
+    "nextjs",
     "llm",
     "openai",
     "typescript",
@@ -36,22 +37,7 @@
     "url": "https://github.com/tardc/hello_node_cli/issues"
   },
   "homepage": "https://github.com/tardc/hello_node_cli#readme",
-  "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
-  ],
   "engines": {
     "node": ">=18.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^22.10.5",
-    "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
-  },
-  "dependencies": {
-    "commander": "^14.0.3",
-    "dotenv": "^17.3.1",
-    "openai": "^6.27.0"
   }
 }
