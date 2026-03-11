@@ -175,5 +175,5 @@ MIT License - 查看 [LICENSE](./LICENSE) 文件了解详情。
 
 ## 🔗 链接
 
-- [GitHub Repository](https://github.com/tardc/hello_node_cli)
-- [Issues](https://github.com/tardc/hello_node_cli/issues)
+- [GitHub Repository](https://github.com/tardc/hello-llm-app)
+- [Issues](https://github.com/tardc/hello-llm-app/issues)

@@ -7,8 +7,8 @@
 ### 1. 克隆仓库
 
 ```bash
-git clone https://github.com/tardc/hello_node_cli.git
-cd hello_node_cli
+git clone https://github.com/tardc/hello-llm-app.git
+cd hello-llm-app
 ```
 
 ### 2. 安装依赖
@@ -93,7 +93,7 @@ npm run build
 
 ## 报告问题
 
-如果你发现了 bug 或有功能建议，请创建一个 [Issue](https://github.com/tardc/hello_node_cli/issues)。
+如果你发现了 bug 或有功能建议，请创建一个 [Issue](https://github.com/tardc/hello-llm-app/issues)。
 
 ## 许可证
 

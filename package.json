@@ -31,12 +31,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tardc/hello_node_cli.git"
+    "url": "git+https://github.com/tardc/hello-llm-app.git"
   },
   "bugs": {
-    "url": "https://github.com/tardc/hello_node_cli/issues"
+    "url": "https://github.com/tardc/hello-llm-app/issues"
   },
-  "homepage": "https://github.com/tardc/hello_node_cli#readme",
+  "homepage": "https://github.com/tardc/hello-llm-app#readme",
   "engines": {
     "node": ">=18.0.0"
   }
